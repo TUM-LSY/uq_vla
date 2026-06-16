@@ -470,7 +470,7 @@
             <span class="copy-text">Copy</span>
           </button>
         </div>
-        <pre id="bibtex-code"><code>@article{roemer2026uqvla,
+        <pre id="bibtex-code"><code>@article{romer2026uq_vla,
   title={Uncertainty Quantification for Flow-Based Vision-Language-Action Models},
   author={Ralf R{\"o}mer and Maximilian Seeliger and Saida Liu and Ben Sturgis and Marco Bagatella and Daniel Marta and Andreas Krause and Angela P. Schoellig},
   year={2026}
@@ -491,6 +491,39 @@
             It is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
         </div>
+        <!-- Visitor Counter -->
+        <div id="visitor-count"
+             style="text-align:center; margin-top:-1.25em; margin-bottom:-2.25em; font-size:0.9em; color:#999; opacity:0; transition:opacity 0.3s;">
+          Visitors: <span id="count">–</span>
+        </div>
+        <script>
+(async () => {
+  const container = document.getElementById("visitor-count");
+  const span = document.getElementById("count");
+  const url = "https://hitscounter.dev/api/hit?output=json&url=https%3A%2F%2Ftum-lsy.github.io%2Fuq_vla%2F&label=Visitors&icon=arrow-right-circle-fill&color=%236ea8fe&message=&style=for-the-badge&tz=Europe%2FBerlin";
+  try {
+    const res = await fetch(url, { cache: "no-store", headers: { "Accept": "application/json" } });
+    const data = await res.json();
+    let val = null;
+    if (data) {
+      if (typeof data.total_hits === "number") val = data.total_hits;
+      else if (typeof data.today_hits === "number") val = data.today_hits;
+      else if (typeof data.count === "number") val = data.count;
+    }
+    if (typeof val === "number" && !Number.isNaN(val)) {
+      span.textContent = val.toLocaleString();
+      container.style.opacity = "1";
+    } else {
+      span.textContent = "n/a";
+      container.style.opacity = "1";
+    }
+  } catch (e) {
+    span.textContent = "error";
+    container.style.opacity = "1";
+    console.error("Visitor counter error:", e);
+  }
+})();
+        </script>
       </div>
     </div>
   </div>

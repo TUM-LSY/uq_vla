@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Uncertainty Quantification for Flow-Based Vision-Language-Action Models - Römer, Ralf; Seeliger, Maximilian; Liu, Saida; Sturgis, Ben; Bagatella, Marco; Marta, Daniel; Krause, Andreas; Schoellig, Angela P.">
+  <meta name="description" content="We quantify epistemic uncertainty in flow-based vision-language-action models via velocity-field disagreement (VFD), enabling failure detection and sample-efficient active fine-tuning.">
+  <meta name="keywords" content="robotics, vision-language-action models, VLA, flow matching, uncertainty quantification, epistemic uncertainty, active learning, failure detection, LIBERO">
+  <meta name="author" content="Römer, Ralf; Seeliger, Maximilian; Liu, Saida; Sturgis, Ben; Bagatella, Marco; Marta, Daniel; Krause, Andreas; Schoellig, Angela P.">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Learning Systems and Robotics (LSY) Lab, TUM">
+  <meta property="og:title" content="Uncertainty Quantification for Flow-Based Vision-Language-Action Models">
+  <meta property="og:description" content="We quantify epistemic uncertainty in flow-based vision-language-action models via velocity-field disagreement (VFD), enabling failure detection and sample-efficient active fine-tuning.">
+  <meta property="og:url" content="https://tum-lsy.github.io/uq_vla/">
+  <meta property="article:author" content="Römer, Ralf; Seeliger, Maximilian; Liu, Saida; Sturgis, Ben; Bagatella, Marco; Marta, Daniel; Krause, Andreas; Schoellig, Angela P.">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="robotics">
+  <meta property="article:tag" content="vision-language-action models">
+  <meta property="article:tag" content="uncertainty quantification">
+  <meta property="article:tag" content="flow matching">
+  <meta property="article:tag" content="active learning">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Uncertainty Quantification for Flow-Based Vision-Language-Action Models">
+  <meta name="citation_author" content="Römer, Ralf">
+  <meta name="citation_author" content="Seeliger, Maximilian">
+  <meta name="citation_author" content="Liu, Saida">
+  <meta name="citation_author" content="Sturgis, Ben">
+  <meta name="citation_author" content="Bagatella, Marco">
+  <meta name="citation_author" content="Marta, Daniel">
+  <meta name="citation_author" content="Krause, Andreas">
+  <meta name="citation_author" content="Schoellig, Angela P.">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_pdf_url" content="https://tum-lsy.github.io/uq_vla/static/uq_vla_paper.pdf">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#3070B3">
+  <meta name="msapplication-TileColor" content="#3070B3">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>Uncertainty Quantification for Flow-Based Vision-Language-Action Models</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Uncertainty Quantification for Flow-Based Vision-Language-Action Models",
+    "description": "We derive an efficient method for quantifying epistemic uncertainty in flow-matching VLAs via velocity-field disagreement (VFD), and use it for failure detection and sample-efficient active fine-tuning.",
+    "author": [
+      { "@type": "Person", "name": "Ralf Römer", "affiliation": { "@type": "Organization", "name": "Technical University of Munich" } },
+      { "@type": "Person", "name": "Maximilian Seeliger", "affiliation": { "@type": "Organization", "name": "ETH Zurich" } },
+      { "@type": "Person", "name": "Saida Liu", "affiliation": { "@type": "Organization", "name": "Technical University of Munich" } },
+      { "@type": "Person", "name": "Ben Sturgis", "affiliation": { "@type": "Organization", "name": "Technical University of Munich" } },
+      { "@type": "Person", "name": "Marco Bagatella", "affiliation": { "@type": "Organization", "name": "ETH Zurich" } },
+      { "@type": "Person", "name": "Daniel Marta", "affiliation": { "@type": "Organization", "name": "ETH Zurich" } },
+      { "@type": "Person", "name": "Andreas Krause", "affiliation": { "@type": "Organization", "name": "ETH Zurich" } },
+      { "@type": "Person", "name": "Angela P. Schoellig", "affiliation": { "@type": "Organization", "name": "Technical University of Munich" } }
+    ],
+    "datePublished": "2026",
+    "url": "https://tum-lsy.github.io/uq_vla/",
+    "keywords": ["robotics", "vision-language-action models", "flow matching", "uncertainty quantification", "epistemic uncertainty", "active learning", "failure detection"],
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Uncertainty Quantification for Flow-Based Vision-Language-Action Models</h1>
+
+            <div class="is-flex is-justify-content-center is-align-items-center" style="margin-bottom: 1em;">
+              <span class="is-size-4 has-text-weight-bold" style="vertical-align:middle; color:#3070B3;">2026</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://ralfroemer.com" target="_blank">Ralf Römer</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/maximilian-seeliger/" target="_blank">Maximilian Seeliger</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://saidaliu27.github.io/" target="_blank">Saida Liu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/ben-sturgis/?locale=de" target="_blank">Ben Sturgis</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://marbaga.github.io/" target="_blank">Marco Bagatella</a><sup>2,3</sup>,</span>
+              <span class="author-block">
+                <a href="https://daniellsm.github.io/" target="_blank">Daniel Marta</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://las.inf.ethz.ch/krausea" target="_blank">Andreas Krause</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.dynsyslab.org/prof-angela-schoellig/" target="_blank">Angela P. Schoellig</a><sup>1</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup> Technical University of Munich&nbsp;&nbsp;</span>
+              <span class="author-block"><sup>2</sup> ETH Zurich&nbsp;&nbsp;</span>
+              <span class="author-block"><sup>3</sup> MPI for Intelligent Systems, Tübingen</span>
+            </div>
+
+            <div class="is-flex is-justify-content-center is-align-items-center" style="gap: 1.2em; margin: 1.2em 0;">
+              <img src="static/images/Logo_of_the_Technical_University_of_Munich.svg" alt="TUM" style="height:2em;">
+              <img src="static/images/eth_logo.png" alt="ETH Zurich" style="height:2em;">
+              <img src="static/images/mpi_logo.webp" alt="MPI for Intelligent Systems" style="height:2.4em;">
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5em;">
+                <span class="link-block" style="width:auto;">
+                  <a href="static/uq_vla_paper.pdf" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark pub-btn">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block" style="width:auto;">
+                  <a href="https://tum-lsy.github.io/uq_vla/" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark pub-btn">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code (coming soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <style>
+            @media (max-width: 600px) {
+              .publication-links { flex-direction: column !important; align-items: center !important; }
+              .publication-links .link-block { width: 100% !important; display: flex; justify-content: center; margin-bottom: 0.5em; }
+              .publication-links .pub-btn { width: 100% !important; justify-content: center; }
+            }
+            </style>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Vision-language-action models (VLAs) combine vision-language backbones with expressive generative action heads
+            trained via flow matching on large-scale robotic datasets. Despite their strong empirical performance in robotic
+            manipulation, VLAs lack mechanisms to quantify confidence in their predictions and to detect when their actions may
+            be unreliable. This presents a critical limitation for real-world deployment in non-stationary environments, where
+            models inevitably encounter scenarios outside their pretraining distribution and may fail without warning.
+            To address this, we derive an efficient method for quantifying epistemic uncertainty in flow-matching models by
+            leveraging <strong>velocity-field disagreement (VFD)</strong> across a small ensemble. We successfully use this
+            uncertainty estimate for <strong>failure detection</strong> during deployment and <strong>active fine-tuning</strong>
+            of flow-based VLAs. To this end, we propose <strong>SAVE</strong>, a framework for uncertainty-guided active
+            multitask fine-tuning that reduces the number of costly expert demonstrations required to adapt VLAs to new tasks.
+            Through extensive experiments on the LIBERO benchmark, we demonstrate that VFD yields better-calibrated uncertainty
+            estimates predictive of downstream performance, that VFD achieves strong performance in detecting failures, and that
+            uncertainty-guided data acquisition with SAVE requires at least <strong>22% fewer samples</strong> than baselines.
+            In summary, our work shows that quantifying epistemic uncertainty in flow-based VLAs improves both failure awareness
+            and adaptation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Overview / Figure 1 -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <h2 class="title is-3">Overview</h2>
+        <img src="static/images/overview.png" alt="Method overview" style="width:100%; height:auto; display:block; margin-bottom:1em;">
+        <div class="content has-text-justified">
+          <span class="is-size-6">
+            <strong>Figure 1.</strong> <strong>Top:</strong> VFD quantifies epistemic uncertainty by measuring scaled
+            differences between ensembled velocity fields. <strong>Bottom:</strong> SAVE prioritizes tasks by their mean VFD
+            uncertainty and, for the most uncertain initial observations within each sampled task, requests an expert
+            demonstration. The models are then fine-tuned using new and replay data, yielding data-efficient multitask
+            adaptation.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Motivation -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="content has-text-justified">
+          <p>
+            Modern VLAs pair a pre-trained vision-language backbone with an action expert trained via flow matching, achieving
+            impressive multitask performance. Yet deploying them in the real world exposes them to non-stationarity: users
+            repurpose robots for novel tasks, object appearances change, and environments evolve.
+          </p>
+          <ul>
+            <li>VLAs <strong>confidently execute erratic actions</strong> in out-of-distribution scenarios rather than abstaining or asking for help.</li>
+            <li>They cannot communicate <strong>what they do not know</strong>, preventing robust self-improvement and timely failure detection.</li>
+            <li>Robustly adapting VLAs to new domains currently requires collecting <strong>large numbers of costly expert demonstrations</strong>.</li>
+          </ul>
+          <p>
+            We address these challenges by quantifying epistemic uncertainty in flow-based VLAs through <strong>velocity-field
+            disagreement (VFD)</strong>, and use it both to detect failures at deployment and to guide data-efficient adaptation
+            with <strong>SAVE</strong> (<u>s</u>ample-efficient <u>a</u>ctive fine-tuning via <u>v</u>elocity-field <u>e</u>pistemic
+            uncertainty).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method / Toy example Figure 2 -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <h2 class="title is-3">Velocity-Field Disagreement</h2>
+        <div class="content has-text-justified">
+          <p>
+            VFD measures the disagreement between the velocity fields of a small ensemble of flow-matching models along their
+            generative ODE trajectories. The estimator is mathematically grounded, computationally tractable, and naturally
+            handles the high-dimensional, multimodal action distributions of VLAs. On a 2D toy problem, VFD is high precisely
+            where inputs leave the training distribution, tracking the KL divergence between the learned and ground-truth
+            conditional distributions.
+          </p>
+        </div>
+        <img src="static/images/toy_example.png" alt="2D toy example of VFD uncertainty" style="width:100%; height:auto; display:block; margin-bottom:1em;">
+        <div class="content has-text-justified">
+          <span class="is-size-6">
+            <strong>Figure 2.</strong> Epistemic uncertainty estimation for a 2D generative modeling problem. Our velocity-field
+            disagreement (VFD) uncertainty score is high for inputs far from the training distribution, similar to the KL
+            divergence between the learned models' conditional distributions and the ground truth.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Calibration: Table 1 + Figures 3 & 4 -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <h2 class="title is-3">Calibration</h2>
+        <div class="content has-text-justified">
+          <p>
+            On the LIBERO benchmark, VFD is more strongly correlated with per-task success rates than a wide range of
+            uncertainty baselines, making it a reliable predictor of downstream performance. A lightweight two-member ensemble
+            is sufficient, and VFD remains well-calibrated even when only the language prompt is varied.
+          </p>
+        </div>
+
+        <div class="table-container" style="margin-bottom: 1.5em;">
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="background-color: white;">
+            <caption class="is-size-6 has-text-justified" style="caption-side: bottom; padding-top: 0.75em;">
+              <strong>Table 1. Calibration analysis.</strong> Negative Spearman rank (&uarr;) and negative Pearson (&uarr;)
+              correlation between uncertainty estimates and per-task success rates, averaged across iterative fine-tuning rounds.
+            </caption>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Action-L2</th>
+                <th>ACE</th>
+                <th>DECU</th>
+                <th>GU</th>
+                <th>Entropy</th>
+                <th>Perplexity</th>
+                <th>VFD (ours)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&minus;Spearman</td>
+                <td>0.50<sup>±0.13</sup></td>
+                <td>0.31<sup>±0.12</sup></td>
+                <td>0.31<sup>±0.13</sup></td>
+                <td>0.62<sup>±0.00</sup></td>
+                <td>0.10<sup>±0.12</sup></td>
+                <td>&minus;0.04<sup>±0.09</sup></td>
+                <td><strong>0.71<sup>±0.03</sup></strong></td>
+              </tr>
+              <tr>
+                <td>&minus;Pearson</td>
+                <td>0.48<sup>±0.09</sup></td>
+                <td>0.36<sup>±0.08</sup></td>
+                <td>0.23<sup>±0.15</sup></td>
+                <td>0.65<sup>±0.02</sup></td>
+                <td>0.23<sup>±0.21</sup></td>
+                <td>0.02<sup>±0.15</sup></td>
+                <td><strong>0.71<sup>±0.02</sup></strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="columns is-vcentered" style="margin-top: 1.5em;">
+          <div class="column is-half has-text-centered">
+            <img src="static/images/ensemble_size_ablation.png" alt="Ensemble size ablation" style="max-height:320px; width:auto; display:block; margin:0 auto;">
+            <div class="content has-text-justified" style="margin-top:0.75em;">
+              <span class="is-size-6"><strong>Figure 3.</strong> The VLA ensemble size has little impact on calibration, allowing for a lightweight two-member ensemble.</span>
+            </div>
+          </div>
+          <div class="column is-half has-text-centered">
+            <img src="static/images/language_variation.png" alt="Language variation calibration" style="max-height:320px; width:auto; display:block; margin:0 auto;">
+            <div class="content has-text-justified" style="margin-top:0.75em;">
+              <span class="is-size-6"><strong>Figure 4.</strong> VFD is also well-calibrated when varying only the language prompt.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Active fine-tuning: Table 2 + Figure 5 -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <h2 class="title is-3">Sample-Efficient Active Fine-Tuning</h2>
+        <div class="content has-text-justified">
+          <p>
+            Using VFD to guide demonstration collection, SAVE reaches target success rates with substantially fewer
+            fine-tuning rounds and attains the highest final success rate among all selection strategies &mdash; reducing the
+            required expert data by at least 22% compared to baselines.
+          </p>
+        </div>
+
+        <div class="table-container" style="margin-bottom: 1.5em;">
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="background-color: white;">
+            <caption class="is-size-6 has-text-justified" style="caption-side: bottom; padding-top: 0.75em;">
+              <strong>Table 2. Sample efficiency.</strong> Number of active fine-tuning rounds (&darr;) to reach certain
+              success rates (SR) and final SR (&uarr;) for different demonstration selection strategies. Thresholds not reached
+              within 15 rounds are marked as "&mdash;".
+            </caption>
+            <thead>
+              <tr>
+                <th>SR Threshold</th>
+                <th>Random</th>
+                <th>Diversity</th>
+                <th>SAVE w/ Action-L2</th>
+                <th>SAVE w/ GU</th>
+                <th>SAVE w/ VFD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>&ge; 40%</td><td>5.7<sup>±1.2</sup></td><td><strong>4.7<sup>±0.5</sup></strong></td><td>5.0<sup>±0.8</sup></td><td>5.0<sup>±1.4</sup></td><td>5.0<sup>±0.8</sup></td></tr>
+              <tr><td>&ge; 45%</td><td>6.7<sup>±1.2</sup></td><td>7.3<sup>±0.9</sup></td><td>6.0<sup>±1.4</sup></td><td>5.7<sup>±2.4</sup></td><td><strong>5.3<sup>±0.9</sup></strong></td></tr>
+              <tr><td>&ge; 50%</td><td>8.7<sup>±2.1</sup></td><td>9.7<sup>±1.7</sup></td><td>9.0<sup>±2.4</sup></td><td>7.3<sup>±1.9</sup></td><td><strong>6.0<sup>±0.8</sup></strong></td></tr>
+              <tr><td>&ge; 55%</td><td>&mdash;</td><td>&mdash;</td><td>9.0<sup>±1.0</sup></td><td>11.0<sup>±1.6</sup></td><td><strong>8.0<sup>±1.6</sup></strong></td></tr>
+              <tr><td>&ge; 60%</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>12.7<sup>±1.7</sup></td><td><strong>10.0<sup>±0.8</sup></strong></td></tr>
+              <tr><td>&ge; 65%</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><strong>12.5<sup>±0.5</sup></strong></td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>Final SR</td><td>54.6<sup>±0.9</sup></td><td>54.9<sup>±1.3</sup></td><td>56.8<sup>±7.6</sup></td><td>64.0<sup>±2.6</sup></td><td><strong>67.1<sup>±3.2</sup></strong></td></tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <img src="static/images/success_share_entropy.png" alt="Effect of task-sampling temperature on SAVE" style="width:100%; height:auto; display:block; margin-top:1em;">
+        <div class="content has-text-justified" style="margin-top:0.75em;">
+          <span class="is-size-6">
+            <strong>Figure 5. Effect of the task-sampling temperature &tau; on SAVE.</strong> Larger &tau; biases expert queries
+            toward higher-uncertainty tasks, with uniform sampling for &tau;=0. <strong>Left:</strong> Uncertainty guidance is
+            beneficial both for sampling tasks and initial observations; legend entries containing <em>uniform</em> sample initial
+            observations within a task uniformly instead of uncertainty-guided. <strong>Middle:</strong> Uncertainty-based sampling
+            more rapidly reduces the fraction of uncertainty concentrated in the most uncertain task, indicating better allocation
+            of demonstrations to underperforming tasks. <strong>Right:</strong> SAVE reduces the difference in prior knowledge
+            about tasks; for &tau; &le; 2.5, the temperature controls an exploration&ndash;exploitation trade-off between task
+            coverage and final success rate.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Highlights -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title is-3">Highlights</h2>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <ul>
+            <li>A mathematically grounded epistemic uncertainty estimator for flow-matching models based on <strong>velocity-field disagreement (VFD)</strong>.</li>
+            <li><strong>SAVE</strong>, a framework for uncertainty-guided active fine-tuning that uses VFD to prioritize tasks and initial states for expert demonstration collection.</li>
+            <li>VFD yields <strong>better-calibrated</strong> uncertainty estimates predictive of downstream task performance, with a lightweight two-member ensemble.</li>
+            <li>VFD detects deployment <strong>failures</strong> more reliably than baselines.</li>
+            <li>SAVE reduces the expert data required for multitask adaptation by <strong>at least 22%</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BibTeX citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>@article{roemer2026uqvla,
+  title={Uncertainty Quantification for Flow-Based Vision-Language-Action Models},
+  author={Ralf R{\"o}mer and Maximilian Seeliger and Saida Liu and Ben Sturgis and Marco Bagatella and Daniel Marta and Andreas Krause and Angela P. Schoellig},
+  year={2026}
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End BibTeX citation -->
+
+<footer class="footer">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths content">
+        <div class="content">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            It is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

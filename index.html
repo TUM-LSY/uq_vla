@@ -162,7 +162,7 @@
             <div class="column has-text-centered">
               <div class="publication-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5em;">
                 <span class="link-block" style="width:auto;">
-                  <a href="static/uq_vla_paper.pdf" target="_blank"
+                  <a href="https://arxiv.org/abs/2606.18043" target="_blank"
                   class="external-link button is-normal is-rounded is-dark pub-btn">
                     <span class="icon"><i class="fas fa-file-pdf"></i></span>
                     <span>Paper</span>
@@ -198,12 +198,12 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Vision-language-action models (VLAs) combine vision-language backbones with expressive generative action heads
-            trained via flow matching on large-scale robotic datasets. Despite their strong empirical performance in robotic
-            manipulation, VLAs lack mechanisms to quantify confidence in their predictions and to detect when their actions may
-            be unreliable. This presents a critical limitation for real-world deployment in non-stationary environments, where
+            <strong>Vision-language-action models (VLAs)</strong> combine vision-language backbones with expressive generative action heads
+            trained via <strong>flow matching</strong> on large-scale robotic datasets. Despite their strong empirical performance in robotic
+            manipulation, VLAs lack mechanisms to quantify <strong>confidence</strong> in their predictions and to detect when their actions may
+            be <strong>unreliable</strong>. This presents a critical limitation for real-world deployment in non-stationary environments, where
             models inevitably encounter scenarios outside their pretraining distribution and may fail without warning.
-            To address this, we derive an efficient method for quantifying epistemic uncertainty in flow-matching models by
+            To address this, we derive an efficient method for quantifying <strong>epistemic uncertainty</strong> in flow-matching models by
             leveraging <strong>velocity-field disagreement (VFD)</strong> across a small ensemble. We successfully use this
             uncertainty estimate for <strong>failure detection</strong> during deployment and <strong>active fine-tuning</strong>
             of flow-based VLAs. To this end, we propose <strong>SAVE</strong>, a framework for uncertainty-guided active
@@ -256,7 +256,7 @@
           </p>
           <ul>
             <li>VLAs <strong>confidently execute erratic actions</strong> in out-of-distribution scenarios rather than abstaining or asking for help.</li>
-            <li>They cannot communicate <strong>what they do not know</strong>, preventing robust self-improvement and timely failure detection.</li>
+            <li>They cannot communicate <strong>what they do not know</strong>, preventing timely failure detection and robust self-improvement.</li>
             <li>Robustly adapting VLAs to new domains currently requires collecting <strong>large numbers of costly expert demonstrations</strong>.</li>
           </ul>
           <p>
@@ -282,18 +282,18 @@
             VFD measures the disagreement between the velocity fields of a small ensemble of flow-matching models along their
             generative ODE trajectories. The estimator is mathematically grounded, computationally tractable, and naturally
             handles the high-dimensional, multimodal action distributions of VLAs. On a 2D toy problem, VFD is high precisely
-            where inputs leave the training distribution, tracking the KL divergence between the learned and ground-truth
+            where inputs lie far outside the training distribution, closely matching the KL divergence between the learned and ground-truth
             conditional distributions.
           </p>
         </div>
         <img src="static/images/toy_example.png" alt="2D toy example of VFD uncertainty" style="width:100%; height:auto; display:block; margin-bottom:1em;">
-        <div class="content has-text-justified">
+        <!-- <div class="content has-text-justified">
           <span class="is-size-6">
             <strong>Figure 2.</strong> Epistemic uncertainty estimation for a 2D generative modeling problem. Our velocity-field
             disagreement (VFD) uncertainty score is high for inputs far from the training distribution, similar to the KL
             divergence between the learned models' conditional distributions and the ground truth.
           </span>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -438,6 +438,32 @@
   </div>
 </section>
 
+<!-- Failure Detection -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <h2 class="title is-3">Failure Detection</h2>
+        <div class="content has-text-justified">
+          <p>
+            Beyond guiding data collection, VFD also signals when a deployed policy is about to fail. We roll out the
+            fine-tuned VLA, compute VFD scores from the two-member ensemble at each action-generation timestep, and calibrate
+            task-specific thresholds from only 10 successful rollouts using conformal prediction. Compared to recent
+            failure-detection baselines (ACE, STAC, RND-OE), high VFD is a strong signal for imminent failure &mdash; reaching
+            <strong>67% accuracy</strong> and correctly predicting <strong>79% of all failures</strong> (TPR).
+          </p>
+        </div>
+        <img src="static/images/failure_detection.png" alt="Failure detection with VFD" style="max-height:360px; width:auto; display:block; margin:0 auto 1em;">
+        <div class="content has-text-justified">
+          <span class="is-size-6">
+            <strong>Figure 6.</strong> VFD epistemic uncertainty can detect failures during deployment.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Highlights -->
 <section class="section hero is-light">
   <div class="container is-max-desktop has-text-centered">
@@ -473,6 +499,7 @@
         <pre id="bibtex-code"><code>@article{romer2026uq_vla,
   title={Uncertainty Quantification for Flow-Based Vision-Language-Action Models},
   author={Ralf R{\"o}mer and Maximilian Seeliger and Saida Liu and Ben Sturgis and Marco Bagatella and Daniel Marta and Andreas Krause and Angela P. Schoellig},
+  journal={arXiv preprint arXiv:2606.18043},
   year={2026}
 }</code></pre>
       </div>
